@@ -303,7 +303,45 @@ Calling `<%= page.content %>` in a view template would yield:
 THEMING
 -------
 
-Coming soon.  [Patches are welcome](https://github.com/ryansobol/mango/issues#issue/3).
+### The View Attribute and Template
+
+The `view` attribute contains the relative path of a view template.  A view template is a file comprised of presentation mark-up and located in the `themes/default/views` directory.  For every content page, the default view template is `page.haml`.  Thankfully, each content page can define a custom view template using the `view` header attribute.
+
+When a content page is requested, its view template is rendered and returned as the response.  Therefore, part of the view template's function is to embed the content page's rendered body in that response.
+
+For example, given the following content page called `content/index.erb`:
+
+    ---
+    title: Congratulations!
+    ---
+    <h1><%= page.title %></h1>
+    
+    <h2>You did it!</h2>
+
+and given the following view template called `themes/default/views/page.haml`:
+
+    %div
+      = page.content
+
+Requesting `/index` would yield:
+
+    <div>
+      <h1>Congratulations!</h1>
+      
+      <h2>You did it!</h2>
+    </div>
+
+The above example highlights the key facets of rendering a content page and its view template.
+
+  1. The router receives a request to `/index` and connects it to the `content/index.erb` content page.
+  2. The content page's body is treated as ERB and the rendered HTML is stored in the page's `content` attribute.
+  3. Since no `view` attribute is defined in the header, the content page's view template is `page.haml`.
+  4. The router locates the `themes/default/views/page.haml` view template.
+  5. The view template is treated as Haml and rendered to HTML.
+  6. In the process, rendered the content page is embedded into the view template.
+  7. The rendered view template is returned as the response.
+
+The EXTENDING section describes Mango's router in detail.
 
 PUBLISHING
 ----------
