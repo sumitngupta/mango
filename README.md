@@ -303,9 +303,56 @@ Calling `<%= page.content %>` in a view template would yield:
 THEMING
 -------
 
+Designers structure and decorate content using a mixture of view, style, and script template files.  Designers utilize standard browser template formats -- HTML, CSS, and JavaScript -- as well as dynamic template formats.
+
+For example, the Mango website generator produces the following template files:
+
+    $ tree /path/to/your/app/themes
+    /path/to/your/app/themes
+    └── default
+        ├── javascripts
+        │   └── timer.coffee
+        ├── public
+        │   ├── favicon.ico
+        │   ├── images
+        │   │   └── particles.gif
+        │   ├── javascripts
+        │   │   └── fireworks.js
+        │   ├── robots.txt
+        │   └── stylesheets
+        │       ├── fireworks.css
+        │       └── reset.css
+        ├── stylesheets
+        │   └── screen.sass
+        └── views
+            ├── 404.haml
+            ├── layout.haml
+            └── page.haml
+
+The above example highlights the key facets of theming by template files.
+
+  1. There is a `default` theme and each theme lives and operates in isolation.
+  2. Themes stash template files in the `javascripts`, `public`, `stylesheets`, and `views` subdirectories.
+  3. Static templates and assets are found in `themes/defaults/public`.
+  4. Dynamic view templates are found in `themes/default/views`.
+  5. Dynamic style templates are found in `themes/defaults/stylesheets`.
+  6. Dynamic script templates are found in `themes/defaults/javascripts`.
+
+### Managing themes
+
+    $ cat config.ru
+    # encoding: UTF-8
+    require "mango"
+    
+    class Mango::Application
+      # set :theme, "default"
+    end
+    
+    run Mango::Application
+
 ### The View Attribute and Template
 
-The `view` attribute contains the relative path of a view template.  A view template is a file comprised of presentation mark-up and located in the `themes/default/views` directory.  For every content page, the default view template is `page.haml`.  Thankfully, each content page can define a custom view template using the `view` header attribute.
+Each content page contains a `view` attribute which is the relative path of a view template.  A view template is a file comprised of presentation mark-up and located in the `themes/default/views` directory.  For every content page, the default view template is `page.haml`.  Thankfully, each content page can define a custom view template using the `view` header attribute.
 
 When a content page is requested, its view template is rendered and returned as the response.  Therefore, part of the view template's function is to embed the content page's rendered body in that response.
 
@@ -341,7 +388,26 @@ The above example highlights the key facets of rendering a content page and its 
   6. In the process, rendered the content page is embedded into the view template.
   7. The rendered view template is returned as the response.
 
+  * [Haml](http://haml-lang.com/)
+  * [ERB](http://ruby-doc.org/stdlib/libdoc/erb/rdoc/classes/ERB.html)
+  * [Liquid](https://github.com/tobi/liquid/wiki)
+
+### Layout templates
+
+
 The EXTENDING section describes Mango's router in detail.
+
+### Style templates
+
+  * [Scss](http://sass-lang.com/) and [Sass](http://sass-lang.com/)
+
+### Script templates
+
+  * [CoffeeScript](http://jashkenas.github.com/coffee-script/)
+
+### 404 templates
+
+### Static templates
 
 PUBLISHING
 ----------
