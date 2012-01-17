@@ -36,7 +36,7 @@ Don't see your favorite content format?  [Patches are welcome](https://github.co
 
 ### Easy to theme
 
-Mango separates a website's theme from it's content.  Using a powerful and flexible template system, Mango facilitates both uniformity of major sections and individuality of content presentation.  In addition to the standard browser formats -- HTML, CSS, and JavaScript --  Mango also supports the following template formats:
+Mango separates a website's theme from it's content.  Using a powerful and flexible template system, Mango facilitates both uniformity of content sections and individuality of content presentation.  In addition to the standard browser formats -- HTML, CSS, and JavaScript --  Mango also supports the following template formats:
 
   * [Haml](http://haml-lang.com/)
   * [ERB](http://ruby-doc.org/stdlib/libdoc/erb/rdoc/classes/ERB.html)
