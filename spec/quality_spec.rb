@@ -9,7 +9,8 @@ describe "This project's" do
     it "contain no malformed whitespace" do
       Dir.chdir(PROJECT_ROOT) do
         `git ls-files`.split("\n").each do |tracked_file|
-          next if tracked_file =~ /\.jpg|\.gif/
+          # Remove README.md when documentation is moved out of the file
+          next if tracked_file =~ /\.jpg|\.gif|README.md/
           tracked_file.should_not contain_tab_characters
           tracked_file.should_not contain_extra_spaces
         end

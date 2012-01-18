@@ -303,7 +303,7 @@ Calling `<%= page.content %>` in a view template would yield:
 THEMING
 -------
 
-Designers structure and decorate content using a mixture of view, style, and script template files.  Designers utilize standard browser template formats -- HTML, CSS, and JavaScript -- as well as dynamic template formats.
+Web Designers structure and decorate content using a mixture of view, style, and script template files.  With Mango's flexible template system, they can utilize standard browser template formats -- HTML, CSS, and JavaScript -- as well as dynamic template formats.
 
 For example, the Mango website generator produces the following template files:
 
@@ -329,9 +329,9 @@ For example, the Mango website generator produces the following template files:
             ├── layout.haml
             └── page.haml
 
-The above example highlights the key facets of theming by template files.
+The above example highlights the key facets of theming using Mango's template system.
 
-  1. There is a `default` theme and each theme lives and operates in isolation.
+  1. There is a `default` theme which lives and operates in isolation from other themes.
   2. Themes stash template files in the `javascripts`, `public`, `stylesheets`, and `views` subdirectories.
   3. Static templates and assets are found in `themes/defaults/public`.
   4. Dynamic view templates are found in `themes/default/views`.
@@ -340,15 +340,25 @@ The above example highlights the key facets of theming by template files.
 
 ### Managing themes
 
+By default, every Mango application uses the `default` theme.  In addition, designers can create multiple themes, which live and operate in isolation from one another.  Keep in mind, however, that a Mango application uses one theme at a time.
+
+For example, given a new theme called `blue`:
+
+    $ mkdir -p themes/blue/public themes/blue/views themes/blue/stylesheets themes/blue/javascripts
+
+When configuring the `config.ru` file to use the `blue` theme:
+
     $ cat config.ru
     # encoding: UTF-8
     require "mango"
     
     class Mango::Application
-      # set :theme, "default"
+      set :theme, "blue"
     end
     
     run Mango::Application
+
+Yields a Mango application ready to use the `blue` theme's template files.
 
 ### The View Attribute and Template
 

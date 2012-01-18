@@ -71,6 +71,10 @@ describe Mango::Runner do
       File.read(expected).should == <<-EOS
 # encoding: UTF-8
 require "mango"
+
+class Mango::Application
+end
+
 run Mango::Application
       EOS
     end
